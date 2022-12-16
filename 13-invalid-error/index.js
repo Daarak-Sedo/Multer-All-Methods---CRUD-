@@ -9,7 +9,11 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.use(methodOverride('_method'))
 
-mongoose.connect('mongodb://localhost:27017/IMGDB2')
+
+mongoose.connect('mongodb+srv://Bhuwan:fake2fake@cluster0.ygunjqo.mongodb.net/testing?retryWrites=true&w=majority')
+    .then(() => console.log(`MongoDb is connected`))
+    .catch(err => console.log(err.message))
+
 let myschema = mongoose.Schema({
     Picture : String
 })
@@ -44,7 +48,7 @@ let upload = multer({
 })
 
 //SINGALE IMAGE UPLODING
-app.post('/singlepost', upload.single('single_input'), (req, res)=>{
+app.post('/singlepost', upload.single('single_input_field'), (req, res)=>{
     req.file
     if(!req.file){
         return console.log('You have not Select any Image, Please Select any Image on Your Computer')
@@ -72,7 +76,7 @@ app.post('/singlepost', upload.single('single_input'), (req, res)=>{
 
 
 //mULTIPLE IMAGE UPLODING
-app.post('/multiplepost', upload.array('multiple_input', 3), (req, res)=>{
+app.post('/multiplepost', upload.array('multiple_input_field', 3), (req, res)=>{
 
  
     if(!req.files){
@@ -116,7 +120,7 @@ app.get('/edit/:id', (req, res)=>{
     res.render('edit-file', {readquery})
 })
 
-app.put('/edit/:id',upload.single('single_input'), (req, res)=>{
+app.put('/edit/:id',upload.single('single_input_field'), (req, res)=>{
    
 
     mymodel.updateOne({_id:req.params.id}, {
@@ -157,6 +161,6 @@ app.get('/view', (req, res)=>{
     
 })
 
-app.listen(300, ()=>{
-    console.log('300 Port Working')
+app.listen(3000, ()=>{
+    console.log('3000 Port Working')
 })

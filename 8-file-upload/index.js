@@ -20,14 +20,14 @@ let upload = multer({
 })
 
 //SINGALE IMAGE UPLODING
-app.post('/singlepost', upload.single('single_input'), (req, res)=>{
+app.post('/singlepost', upload.single('single_input_field'), (req, res)=>{
     req.file
     res.send(req.file)
 })
 
 
 //mULTIPLE IMAGE UPLODING
-app.post('/multiplepost', upload.array('multiple_input', 3), (req, res)=>{
+app.post('/multiplepost', upload.array('multiple_input_field', 3), (req, res)=>{
     req.files
     res.send(req.files)
 })                         
@@ -36,6 +36,6 @@ app.get('/', (req, res)=>{
     res.render('index')
 })
 
-app.listen(300, ()=>{
-    console.log('300 Port Working')
+app.listen(3000, ()=>{
+    console.log('3000 Port Working')
 })
